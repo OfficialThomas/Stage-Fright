@@ -25,7 +25,8 @@ class Menu extends Phaser.Scene {
         //menu art
 
         //menu text
-        this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'Menu Scene', gameConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 - borderUISize*4, 'Menu Scene', gameConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + borderUISize*4, 'Press the punch key (F) or the kick key (J) to start.', gameConfig).setOrigin(0.5);
 
         //define keys
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);

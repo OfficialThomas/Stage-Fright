@@ -1,5 +1,5 @@
-//Player prefab
-class Player extends Phaser.GameObjects.Sprite {
+//Enemy prefab
+class Enemy extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, height, width, texture, frame){
         super(scene, x, y, height, width, texture, frame);
 
