@@ -9,8 +9,8 @@ class Play extends Phaser.Scene {
     }
 
     create(){
-        //display menu
-        let menuConfig = {
+        //text format
+        let gameConfig = {
             fontFamily: 'Impact',
             fontSize: '28px',
             color: '#FFFFFF',
@@ -22,10 +22,13 @@ class Play extends Phaser.Scene {
             fixedWidth: 0
         }
         
-        //Play Art
+        //play art
 
-        //Play Text
-        this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'Play Scene', menuConfig).setOrigin(0.5);
+        //play text
+        this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'Play Scene', gameConfig).setOrigin(0.5);
         
+        //define keys
+        keyF = this.input.keyboard.addKey(Phaser.Input.KeyCodes.F);
+        keyJ = this.input.keyboard.addKey(Phaser.Input.KeyCodes.J);
     }
 }

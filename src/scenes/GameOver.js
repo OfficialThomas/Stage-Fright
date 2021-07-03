@@ -9,8 +9,8 @@ class GameOver extends Phaser.Scene {
     }
 
     create(){
-        //display menu
-        let menuConfig = {
+        //text format
+        let gameConfig = {
             fontFamily: 'Impact',
             fontSize: '28px',
             color: '#FFFFFF',
@@ -22,10 +22,13 @@ class GameOver extends Phaser.Scene {
             fixedWidth: 0
         }
         
-        //Play Art
+        //game over art
 
-        //Play Text
-        this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'Game Over', menuConfig).setOrigin(0.5);
+        //game over text
+        this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'Game Over', gameConfig).setOrigin(0.5);
         
+        //define keys
+        keyF = this.input.keyboard.addKey(Phaser.Input.KeyCodes.F);
+        keyJ = this.input.keyboard.addKey(Phaser.Input.KeyCodes.J);
     }
 }
