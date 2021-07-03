@@ -13,7 +13,8 @@ class GameOver extends Phaser.Scene {
         let gameConfig = {
             fontFamily: 'Impact',
             fontSize: '28px',
-            color: '#FFFFFF',
+            color: '#000000',
+            backgroundColor: '#F3B141',
             align: 'center',
             padding: {
                 top: 5,
@@ -23,7 +24,10 @@ class GameOver extends Phaser.Scene {
         }
         
         //game over art
-        this.background = this.add.tileSprite(0, 0, 640, 480, 'over').setOrigin(0, 0,5);
+        this.background = this.add.image(game.config.width/2, game.config.height/2, 'over');
+        //learned .setScale from this page
+        //https://stackoverflow.com/questions/56220214/how-to-correctly-resize-images-to-retain-quality-in-phaser-3
+        this.background.setScale(0.235);
 
         //game over text
         this.add.text(game.config.width/2, game.config.height/2 - borderUISize*4, 'Game Over', gameConfig).setOrigin(0.5);
