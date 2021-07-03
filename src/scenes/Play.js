@@ -4,7 +4,6 @@ class Play extends Phaser.Scene {
     }
 
     preload(){
-        //load any audio for the game here
         //load any art for the scene here
     }
 
