@@ -5,6 +5,9 @@ class Play extends Phaser.Scene {
 
     preload(){
         //load any art for the scene here
+        this.load.image('player', './assets/character_idle.png');
+        this.load.image('kick', './assets/character_kick.png');
+        this.load.image('punch', './assets/Character_Punch.png');
         this.load.image('stage', './assets/stagefinal.png');
     }
 
@@ -26,7 +29,9 @@ class Play extends Phaser.Scene {
         //tile sprite
         this.stage = this.add.tileSprite(0, 0, 640, 480, 'stage').setOrigin(0, 0);
         //player
-        this.add.rectangle(game.config.width/2 - borderPadding*20, game.config.height/2, borderUISize*2, borderUISize*4, 0x0000FF).setOrigin(0.5);
+        this.p1 = new Player(this, game.config.width/2 - borderPadding*20, game.config.height/2, 'player').setOrigin(0.5);
+        this.p1.setScale(5);
+        //this.add.rectangle(game.config.width/2 - borderPadding*20, game.config.height/2, borderUISize*2, borderUISize*4, 0x0000FF).setOrigin(0.5);
         //square F
         this.add.rectangle(game.config.width/2 - borderPadding*13.9, game.config.height/2 - borderPadding*3, borderUISize*2, borderUISize*2, 0x00FF00).setOrigin(0.5);
         //square J
@@ -39,6 +44,7 @@ class Play extends Phaser.Scene {
 
         //play text
         //score
+        this.saysScore = this.add.text(borderUISize + borderPadding*4, game.config.height - borderUISize*3, "Score", gameConfig);
         this.scorePlayer = this.add.text(borderUISize + borderPadding*4, game.config.height - borderUISize*2, this.pScore, gameConfig);
         //lives
         this.lives = this.add.text(game.config.width - borderUISize*8, game.config.height - borderUISize*2, "Lives", gameConfig);
@@ -49,7 +55,7 @@ class Play extends Phaser.Scene {
     }
 
     update(){
-        this.stage.tilePositionX += 1.2;
+        this.stage.tilePositionX += 1.5;
         if(Phaser.Input.Keyboard.JustDown(keyF) || Phaser.Input.Keyboard.JustDown(keyJ)){
             this.scene.start('overScene');
         }
