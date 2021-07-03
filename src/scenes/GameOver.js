@@ -5,6 +5,7 @@ class GameOver extends Phaser.Scene {
 
     preload(){
         //load any art for the scene here
+        this.load.image('over', './assets/game_over_endless_runner.png');
     }
 
     create(){
@@ -22,6 +23,7 @@ class GameOver extends Phaser.Scene {
         }
         
         //game over art
+        this.background = this.add.tileSprite(0, 0, 640, 480, 'over').setOrigin(0, 0,5);
 
         //game over text
         this.add.text(game.config.width/2, game.config.height/2 - borderUISize*4, 'Game Over', gameConfig).setOrigin(0.5);

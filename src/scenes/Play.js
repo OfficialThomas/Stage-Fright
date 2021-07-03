@@ -5,8 +5,7 @@ class Play extends Phaser.Scene {
 
     preload(){
         //load any art for the scene here
-        //spritesheet
-        this.load.spritesheet('stage', './assets/stagefinal.png');
+        this.load.image('stage', './assets/stagefinal.png');
     }
 
     create(){
@@ -25,7 +24,7 @@ class Play extends Phaser.Scene {
         
         //play art:
         //tile sprite
-        //this.stage = this.add.tileSprite(0, 0, 640, 'stage').setOrigin(0, 0);
+        this.stage = this.add.tileSprite(0, 0, 640, 480, 'stage').setOrigin(0, 0);
         //player
         this.add.rectangle(game.config.width/2 - borderPadding*20, game.config.height/2 + borderPadding*4, borderUISize*2, borderUISize*4, 0x0000FF).setOrigin(0.5);
         //square F
@@ -42,7 +41,7 @@ class Play extends Phaser.Scene {
     }
 
     update(){
-        this.stage.tilePositionX -= 4;
+        this.stage.tilePositionX += 1.2;
         if(Phaser.Input.Keyboard.JustDown(keyF) || Phaser.Input.Keyboard.JustDown(keyJ)){
             this.scene.start('overScene');
         }
