@@ -35,13 +35,14 @@ class Play extends Phaser.Scene {
         this.p1.setScale(5);
         //this.add.rectangle(game.config.width/2 - borderPadding*20, game.config.height/2, borderUISize*2, borderUISize*4, 0x0000FF).setOrigin(0.5);
         //square F
-        this.add.rectangle(game.config.width/2 - borderPadding*13.9, game.config.height/2 - borderPadding*3, borderUISize*2, borderUISize*2, 0x00FF00).setOrigin(0.5);
+        
         //square J
-        this.add.rectangle(game.config.width/2 - borderPadding*13.9, game.config.height/2 + borderPadding*3, borderUISize*2, borderUISize*2, 0xFF0000).setOrigin(0.5);
+        
 
         //values
+        let time = 5000;
         this.pScore = 0;
-        this.isAttacking = false;
+        this.timing = 0;
         this.gameOver = false;
 
         //play text
@@ -59,12 +60,25 @@ class Play extends Phaser.Scene {
     update(time, delta){
         //scrolling
         this.stage.tilePositionX += 1.5;
-        
-        if(Phaser.Input.Keyboard.JustDown(keyF)){
-            console.log("punch");
-        } else if(Phaser.Input.Keyboard.JustDown(keyJ)){
-            console.log("kick");
+
+        //update attack
+        this.timing -= delta;
+        if(this.timing < 0){
+            this.timing = 0;
         }
+        
+        if(this.timing <= 0){
+            if(Phaser.Input.Keyboard.JustDown(keyF)){
+                this.timing = time;
+                console.log("punch");
+                this.top = this.add.rectangle(game.config.width/2 - borderPadding*13.9, game.config.height/2 - borderPadding*3, borderUISize*2, borderUISize*2, 0x00FF00).setOrigin(0.5);
+            } else if(Phaser.Input.Keyboard.JustDown(keyJ)){
+                this.timing = time;
+                console.log("kick");
+                this.bottom = this.add.rectangle(game.config.width/2 - borderPadding*13.9, game.config.height/2 + borderPadding*3, borderUISize*2, borderUISize*2, 0xFF0000).setOrigin(0.5);
+            }
+        }
+        
     }
     
 }
