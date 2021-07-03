@@ -8,6 +8,8 @@ class Play extends Phaser.Scene {
         this.load.image('player', './assets/character_idle.png');
         this.load.image('kick', './assets/character_kick.png');
         this.load.image('punch', './assets/Character_Punch.png');
+        this.load.image('heart', './assets/heartfull.png');
+        this.load.image('hearthalf', './assets/heartshalf.png');
         this.load.image('stage', './assets/stagefinal.png');
     }
 
@@ -29,7 +31,7 @@ class Play extends Phaser.Scene {
         //tile sprite
         this.stage = this.add.tileSprite(0, 0, 640, 480, 'stage').setOrigin(0, 0);
         //player
-        this.p1 = new Player(this, game.config.width/2 - borderPadding*20, game.config.height/2, 'player').setOrigin(0.5);
+        this.p1 = new Player(this, game.config.width/2 - borderPadding*20, game.config.height/2, 'player', 0, 3).setOrigin(0.5);
         this.p1.setScale(5);
         //this.add.rectangle(game.config.width/2 - borderPadding*20, game.config.height/2, borderUISize*2, borderUISize*4, 0x0000FF).setOrigin(0.5);
         //square F
@@ -39,8 +41,8 @@ class Play extends Phaser.Scene {
 
         //values
         this.pScore = 0;
-        //time period between buttons
-        this.timing = 2000;
+        this.isAttacking = false;
+        this.gameOver = false;
 
         //play text
         //score
@@ -54,10 +56,14 @@ class Play extends Phaser.Scene {
         keyJ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
     }
 
-    update(){
+    update(time, delta){
+        //scrolling
         this.stage.tilePositionX += 1.5;
-        if(Phaser.Input.Keyboard.JustDown(keyF) || Phaser.Input.Keyboard.JustDown(keyJ)){
-            this.scene.start('overScene');
+        
+        if(Phaser.Input.Keyboard.JustDown(keyF)){
+            console.log("punch");
+        } else if(Phaser.Input.Keyboard.JustDown(keyJ)){
+            console.log("kick");
         }
     }
     
