@@ -1,13 +1,12 @@
 //Player prefab
 class Player extends Phaser.GameObjects.Sprite {
-    constructor(scene, x, y, texture, frame){
-        super(scene, x, y, texture, frame);
+    constructor(scene, x, y, height, width, texture, frame){
+        super(scene, x, y, height, width, texture, frame);
 
         //add object to scene
         scene.add.existing(this);
         this.isAttacking = false;
         this.lives = 3;
-        //load any sound effects
     }
 
     update(){
