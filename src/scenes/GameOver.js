@@ -28,7 +28,7 @@ class GameOver extends Phaser.Scene {
         this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'Game Over', gameConfig).setOrigin(0.5);
         
         //define keys
-        keyF = this.input.keyboard.addKey(Phaser.Input.KeyCodes.F);
-        keyJ = this.input.keyboard.addKey(Phaser.Input.KeyCodes.J);
+        keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
+        keyJ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
     }
 }
