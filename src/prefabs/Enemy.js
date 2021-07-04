@@ -11,4 +11,8 @@ class Enemy extends Phaser.GameObjects.Sprite {
         //move enemy left
         this.x -= this.moveSpeed;
     }
+
+    reset() {
+        
+    }
 }
