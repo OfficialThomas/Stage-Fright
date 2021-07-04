@@ -71,8 +71,11 @@ class Play extends Phaser.Scene {
         //scrolling
         this.stage.tilePositionX += 1.5;
         
+        //new code needs to be here
         this.e1.update();
         this.e2.update();
+
+        //stop new code here unless you are making a new method
 
         //end game condition
         if(this.lives <= 0){
@@ -92,4 +95,6 @@ class Play extends Phaser.Scene {
             return false;
         }
     }
+
+    //place new methods here
 }
