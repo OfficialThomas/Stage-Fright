@@ -61,6 +61,8 @@ class Play extends Phaser.Scene {
     update(time, delta){
         //scrolling
         this.stage.tilePositionX += 1.5;
+
+        if(!this.gameOver)
         
         this.e1.update();
         this.e2.update();
@@ -70,5 +72,13 @@ class Play extends Phaser.Scene {
             this.scene.start('overScene');
         }
     }
-    
+
+    checkCollision(player, enemy){
+        //simple AABB checking
+        if (player.x < enemy.x + enemy.width && player.x + player.width > enemy.x && player.y < enemy.y + enemy.height && player.height + player.y > enemy.y){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
