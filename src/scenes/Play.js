@@ -8,6 +8,8 @@ class Play extends Phaser.Scene {
         this.load.image('player', './assets/character_idle.png');
         this.load.image('kick', './assets/character_kick.png');
         this.load.image('punch', './assets/Character_Punch.png');
+        this.load.image('red', './assets/enemy_Red.png');
+        this.load.image('green', './assets/enemy_Green.png');
         this.load.image('heart', './assets/heartfull.png');
         this.load.image('hearthalf', './assets/heartshalf.png');
         this.load.image('stage', './assets/stagefinal.png');
@@ -39,8 +41,8 @@ class Play extends Phaser.Scene {
         this.bot.alpha = 0;
 
         //enemy
-        this.e1 = new Enemy(this, game.config.width, game.config.height/2 - borderPadding*4, 'hearthalf', 0).setOrigin(0.5);
-        this.e2 = new Enemy(this, game.config.width, game.config.height/2 + borderPadding*4, 'hearthalf', 0).setOrigin(0.5);
+        this.e1 = new Enemy(this, game.config.width, game.config.height/2 - borderPadding*4, 'green', 0).setOrigin(0.5);
+        this.e2 = new Enemy(this, game.config.width, game.config.height/2 + borderPadding*4, 'red', 0).setOrigin(0.5);
 
         //values
         this.pScore = 0;
