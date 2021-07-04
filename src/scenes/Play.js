@@ -40,7 +40,7 @@ class Play extends Phaser.Scene {
         
 
         //values
-        let time = 5000;
+        this.timeVal = 500;
         this.pScore = 0;
         this.timing = 0;
         this.gameOver = false;
@@ -69,11 +69,11 @@ class Play extends Phaser.Scene {
         
         if(this.timing <= 0){
             if(Phaser.Input.Keyboard.JustDown(keyF)){
-                this.timing = time;
+                this.timing = timeVal;
                 console.log("punch");
                 this.top = this.add.rectangle(game.config.width/2 - borderPadding*13.9, game.config.height/2 - borderPadding*3, borderUISize*2, borderUISize*2, 0x00FF00).setOrigin(0.5);
             } else if(Phaser.Input.Keyboard.JustDown(keyJ)){
-                this.timing = time;
+                this.timing = timeVal;
                 console.log("kick");
                 this.bottom = this.add.rectangle(game.config.width/2 - borderPadding*13.9, game.config.height/2 + borderPadding*3, borderUISize*2, borderUISize*2, 0xFF0000).setOrigin(0.5);
             }
