@@ -34,9 +34,7 @@ class Play extends Phaser.Scene {
         this.p1 = new Player(this, game.config.width/2 - borderPadding*20, game.config.height/2, 'player', 0).setOrigin(0.5);
         this.p1.setScale(5);
         this.e1 = new Enemy(this, game.config.width, game.config.height/2 - borderPadding*4, 'hearthalf', 0).setOrigin(0,0);
-        this.e2 = new Enemy(this, game.config.width, game.config.height/2 - borderPadding*4, 'hearthalf', 0).setOrigin(0,0);
-        this.e3 = new Enemy(this, game.config.width, game.config.height/2 + borderPadding*4, 'hearthalf', 0).setOrigin(0,0);
-        this.e4 = new Enemy(this, game.config.width, game.config.height/2 + borderPadding*4, 'hearthalf', 0).setOrigin(0,0);
+        this.e2 = new Enemy(this, game.config.width, game.config.height/2 + borderPadding*4, 'hearthalf', 0).setOrigin(0,0);
 
         //values
         this.timeVal = 500;
@@ -65,6 +63,7 @@ class Play extends Phaser.Scene {
         this.stage.tilePositionX += 1.5;
         
         this.e1.update();
+        this.e2.update();
 
         //end game
         if(this.gameOver){
