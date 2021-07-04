@@ -33,13 +33,20 @@ class Play extends Phaser.Scene {
         //player
         this.p1 = new Player(this, game.config.width/2 - borderPadding*20, game.config.height/2, 'player', 0).setOrigin(0.5);
         this.p1.setScale(5);
-        this.e1 = new Enemy(this, game.config.width, game.config.height/2 - borderPadding*4, 'hearthalf', 0).setOrigin(0,0);
-        this.e2 = new Enemy(this, game.config.width, game.config.height/2 + borderPadding*4, 'hearthalf', 0).setOrigin(0,0);
+        this.top = this.add.rectangle(game.config.width/2 - borderPadding*14, game.config.height/2 - borderPadding*4, borderUISize*1.5, borderUISize*1.5, 0x00FF00).setOrigin(0.5);
+        this.bot = this.add.rectangle(game.config.width/2 - borderPadding*14, game.config.height/2 + borderPadding*4, borderUISize*1.5, borderUISize*1.5, 0xFF0000).setOrigin(0.5);
+        this.top.alpha = 0;
+        this.bot.alpha = 0;
+
+        //enemy
+        this.e1 = new Enemy(this, game.config.width, game.config.height/2 - borderPadding*4, 'hearthalf', 0).setOrigin(0.5);
+        this.e2 = new Enemy(this, game.config.width, game.config.height/2 + borderPadding*4, 'hearthalf', 0).setOrigin(0.5);
 
         //values
-        this.timeVal = 500;
         this.pScore = 0;
         this.timing = 0;
+        this.timeVal = 500;
+        this.lives = 3;
         this.gameOver = false;
 
         //play text
@@ -48,7 +55,7 @@ class Play extends Phaser.Scene {
         this.scorePlayer = this.add.text(borderUISize + borderPadding*4, game.config.height - borderUISize*2, this.pScore, gameConfig);
         
         //lives
-        this.lives = this.add.text(game.config.width - borderUISize*8, game.config.height - borderUISize*3, "Lives", gameConfig);
+        this.livestext = this.add.text(game.config.width - borderUISize*8, game.config.height - borderUISize*3, "Lives", gameConfig);
         this.heart1 = this.add.image(game.config.width - borderUISize*5, game.config.height - borderUISize*2.3, 'heart');
         this.heart2 = this.add.image(game.config.width - borderUISize*4, game.config.height - borderUISize*2.3, 'heart');
         this.heart3 = this.add.image(game.config.width - borderUISize*3, game.config.height - borderUISize*2.3, 'heart');
@@ -61,12 +68,14 @@ class Play extends Phaser.Scene {
     update(time, delta){
         //scrolling
         this.stage.tilePositionX += 1.5;
-
-        if(!this.gameOver)
         
         this.e1.update();
         this.e2.update();
 
+        //end game condition
+        if(this.lives <= 0){
+            this.gameOver = true;
+        }
         //end game
         if(this.gameOver){
             this.scene.start('overScene');
