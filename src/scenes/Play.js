@@ -32,15 +32,17 @@ class Play extends Phaser.Scene {
         }
         
         //play art:
+        
         //tile sprite
         this.stage = this.add.tileSprite(0, 0, 640, 480, 'stage').setOrigin(0, 0);
-        //player
+        // add player
         this.p1 = new Player(this, game.config.width/2 - borderPadding*20, game.config.height/2, 'player', 0).setOrigin(0.5);
-        //this.p1.setScale(5);
+
+        // add punch and kick blocks
         this.top = this.add.image(game.config.width/2 - borderPadding*14, game.config.height/2 - borderPadding*4, 'punchF').setOrigin(0.5);
         this.bot = this.add.image(game.config.width/2 - borderPadding*14, game.config.height/2 + borderPadding*4, 'kickJ').setOrigin(0.5);
-        //this.top.alpha = 0;
-        //this.bot.alpha = 0;
+        this.top.alpha = 0;
+        this.bot.alpha = 0;
 
         //enemy
         this.e1 = new Enemy(this, game.config.width, game.config.height/2 - borderPadding*4, 'green', 0).setOrigin(0.5);
@@ -77,6 +79,18 @@ class Play extends Phaser.Scene {
         this.e1.update();
         this.e2.update();
 
+        //f and j blocks pressed
+        if (Phaser.Input.Keyboard.JustDown(keyF)) {
+            this.top.alpha = 1;
+            //this.p1Punch = this.add.sprite(p1.x, p1.y, 'punch', 0).setOrigin(0.5);
+        }
+        if (Phaser.Input.Keyboard.JustDown(keyJ)) {
+            this.bot.alpha = 1;
+            //this.p1Kick = this.add.sprite(p1.x, p1.y, 'kick', 0).setOrigin(0.5);
+        }
+
+
+
         //stop new code here unless you are making a new method
 
         //end game condition
@@ -99,4 +113,5 @@ class Play extends Phaser.Scene {
     }
 
     //place new methods here
+
 }
