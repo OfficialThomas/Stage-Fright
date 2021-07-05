@@ -12,7 +12,9 @@ class Play extends Phaser.Scene {
         this.load.image('green', './assets/enemy_Green.png');
         this.load.image('heart', './assets/heartfull.png');
         this.load.image('hearthalf', './assets/heartshalf.png');
-        this.load.image('stage', './assets/stagefinal.png');
+        this.load.image('stage', './assets/stagefinal2.png');
+        this.load.image('punchF', './assets/FkeyPunch.png');
+        this.load.image('kickJ', './assets/JkeyKick.png');
     }
 
     create(){
@@ -35,10 +37,10 @@ class Play extends Phaser.Scene {
         //player
         this.p1 = new Player(this, game.config.width/2 - borderPadding*20, game.config.height/2, 'player', 0).setOrigin(0.5);
         this.p1.setScale(5);
-        this.top = this.add.rectangle(game.config.width/2 - borderPadding*14, game.config.height/2 - borderPadding*4, borderUISize*1.5, borderUISize*1.5, 0x00FF00).setOrigin(0.5);
-        this.bot = this.add.rectangle(game.config.width/2 - borderPadding*14, game.config.height/2 + borderPadding*4, borderUISize*1.5, borderUISize*1.5, 0xFF0000).setOrigin(0.5);
-        this.top.alpha = 0;
-        this.bot.alpha = 0;
+        this.top = this.add.image(game.config.width/2 - borderPadding*14, game.config.height/2 - borderPadding*4, 'punchF').setOrigin(0.5);
+        this.bot = this.add.image(game.config.width/2 - borderPadding*14, game.config.height/2 + borderPadding*4, 'kickJ').setOrigin(0.5);
+        //this.top.alpha = 0;
+        //this.bot.alpha = 0;
 
         //enemy
         this.e1 = new Enemy(this, game.config.width, game.config.height/2 - borderPadding*4, 'green', 0).setOrigin(0.5);
