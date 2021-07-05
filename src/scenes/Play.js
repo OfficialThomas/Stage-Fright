@@ -82,11 +82,22 @@ class Play extends Phaser.Scene {
         //f and j blocks pressed
         if (Phaser.Input.Keyboard.JustDown(keyF)) {
             this.top.alpha = 1;
-            //this.p1Punch = this.add.sprite(p1.x, p1.y, 'punch', 0).setOrigin(0.5);
+            keyJ.enabled = false
+            function onEvent() {                //used this for the time delay: https://phaser.io/examples/v3/view/time/timer-event
+                this.top.alpha = 0;
+                keyJ.enabled = true             //how to disable keys: https://phaser.discourse.group/t/temporarry-disable-key-captures-in-game/4524/3
+                
+            } 
+            this.timedEvent = this.time.delayedCall(1000, onEvent, [], this);
         }
         if (Phaser.Input.Keyboard.JustDown(keyJ)) {
             this.bot.alpha = 1;
-            //this.p1Kick = this.add.sprite(p1.x, p1.y, 'kick', 0).setOrigin(0.5);
+            keyF.enabled = true
+            function onEvent() {
+                this.bot.alpha = 0;
+                keyF.enabled = false
+            } 
+            this.timedEvent = this.time.delayedCall(1000, onEvent, [], this);
         }
 
 
@@ -113,5 +124,5 @@ class Play extends Phaser.Scene {
     }
 
     //place new methods here
-
+    
 }
