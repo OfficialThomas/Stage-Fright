@@ -82,22 +82,35 @@ class Play extends Phaser.Scene {
         //f and j blocks pressed
         if (Phaser.Input.Keyboard.JustDown(keyF)) {
             this.top.alpha = 1;
+            this.p1.alpha = 0;
+            this.playerPunch = new Player(this, game.config.width/2 - borderPadding*20, game.config.height/2, 'punch', 0).setOrigin(0.5); // Player punch image/anim shows
             keyJ.enabled = false
             function onEvent() {                //used this for the time delay: https://phaser.io/examples/v3/view/time/timer-event
                 this.top.alpha = 0;
+                this.playerPunch.destroy();
+                this.p1.alpha = 1;
                 keyJ.enabled = true             //how to disable keys: https://phaser.discourse.group/t/temporarry-disable-key-captures-in-game/4524/3
-                
+                keyF.enabled = true
+
+                /* Hey Thomas or Edward if you play the game there are some glitches with the f/j block going at the same 
+                time sometimes and also sometimes the punch and kick animations continue to stay on the screen*/
+
             } 
-            this.timedEvent = this.time.delayedCall(1000, onEvent, [], this);
+            this.timedEvent = this.time.delayedCall(500, onEvent, [], this);
         }
         if (Phaser.Input.Keyboard.JustDown(keyJ)) {
             this.bot.alpha = 1;
-            keyF.enabled = true
+            this.p1.alpha = 0;
+            this.playerKick = new Player(this, game.config.width/2 - borderPadding*20, game.config.height/2, 'kick', 0).setOrigin(0.5); //Player kick image/anim shows
+            keyF.enabled = false
             function onEvent() {
                 this.bot.alpha = 0;
-                keyF.enabled = false
+                this.playerKick.destroy();
+                this.p1.alpha = 1; 
+                keyF.enabled = true
+                keyJ.enabled = true
             } 
-            this.timedEvent = this.time.delayedCall(1000, onEvent, [], this);
+            this.timedEvent = this.time.delayedCall(500, onEvent, [], this);
         }
 
 
