@@ -5,17 +5,23 @@ class Play extends Phaser.Scene {
 
     preload(){
         //load any art for the scene here
-        this.load.image('player', './assets/character_idle.png');
+        //player character
+        this.load.spritesheet('idle', './assets/character_running.png', { frameWidth: 80, frameHeight: 120 });
         this.load.image('kick', './assets/character_kick.png');
         this.load.image('punch', './assets/Character_Punch.png');
-        this.load.image('red', './assets/enemy_Red.png');
-        this.load.image('green', './assets/enemy_Green.png');
-        this.load.image('heart', './assets/heartfull.png');
-        this.load.image('hearthalf', './assets/heartshalf.png');
-        this.load.image('stage', './assets/stagefinal.png');
         this.load.image('punchF', './assets/FkeyPunch.png');
         this.load.image('kickJ', './assets/JkeyKick.png');
-        this.load.spritesheet('idle', './assets/character_running.png', { frameWidth: 80, frameHeight: 120 });
+
+        //enemies
+        this.load.image('red', './assets/enemy_Red.png');
+        this.load.image('green', './assets/enemy_Green.png');
+
+        //lives
+        this.load.image('heart', './assets/heartfull.png');
+        this.load.image('hearthalf', './assets/heartshalf.png');
+
+        //background
+        this.load.image('stage', './assets/stagefinal.png');
     }
 
     create(){
@@ -38,14 +44,13 @@ class Play extends Phaser.Scene {
         this.stage = this.add.tileSprite(0, 0, 640, 480, 'stage').setOrigin(0, 0);
 
         // add player
-        const playerAnimation = this.anims.create({ //reference https://labs.phaser.io/edit.html?src=src/animation/animation%20repeat%20event.js&v=3.55.2
+        //reference https://labs.phaser.io/edit.html?src=src/animation/animation%20repeat%20event.js&v=3.55.2
+        const playerAnimation = this.anims.create({ 
             key: 'running',
             frames: this.anims.generateFrameNumbers('idle'),
             frameRate: 12
         });
-
         this.p1 = this.add.sprite(game.config.width/2 - borderPadding*20, game.config.height/2, 'idle');
-
         this.p1.play({ key: 'running', repeat: -1 });
 
         // add punch and kick blocks
@@ -59,11 +64,17 @@ class Play extends Phaser.Scene {
         this.e2 = new Enemy(this, game.config.width, game.config.height/2 + borderPadding*4, 'red', 0).setOrigin(0.5);
 
         //values
+        //ui values
         this.pScore = 0;
-        this.timing = 0;
-        this.timeVal = 500;
         this.lives = 3;
         this.gameOver = false;
+        
+        //animation values
+        this.timeLimit = 500;
+        this.fTimer = 0;
+        this.jTimer = 0;
+        this.canPunch = true;
+        this.canKick = true;
 
         //play text
         //score

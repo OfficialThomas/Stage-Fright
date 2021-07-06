@@ -8,10 +8,4 @@ class Player extends Phaser.GameObjects.Sprite {
 
 
     }
-
-    //reset player animation to deafult
-    reset () {
-        this.isPunching = false;
-        this.isKicking = false;
-    }
 }
