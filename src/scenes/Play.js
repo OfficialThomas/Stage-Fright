@@ -15,6 +15,7 @@ class Play extends Phaser.Scene {
         this.load.image('stage', './assets/stagefinal.png');
         this.load.image('punchF', './assets/FkeyPunch.png');
         this.load.image('kickJ', './assets/JkeyKick.png');
+        this.load.spritesheet('idle', './assets/character_running.png', { frameWidth: 80, frameHeight: 120 });
     }
 
     create(){
@@ -35,8 +36,18 @@ class Play extends Phaser.Scene {
         
         //tile sprite
         this.stage = this.add.tileSprite(0, 0, 640, 480, 'stage').setOrigin(0, 0);
+
         // add player
-        this.p1 = new Player(this, game.config.width/2 - borderPadding*20, game.config.height/2, 'player', 0).setOrigin(0.5);
+        //this.p1 = new Player(this, game.config.width/2 - borderPadding*20, game.config.height/2, 'idle', 0).setOrigin(0.5);
+        const playerAnimation = this.anims.create({
+            key: 'running',
+            frames: this.anims.generateFrameNumbers('idle'),
+            frameRate: 16
+        });
+
+        this.p1 = this.add.sprite(game.config.width/2 - borderPadding*20, game.config.height/2, 'idle');
+
+        this.p1.play({ key: 'running', repeat: -1 });
 
         // add punch and kick blocks
         this.top = this.add.image(game.config.width/2 - borderPadding*14, game.config.height/2 - borderPadding*4, 'punchF').setOrigin(0.5);
