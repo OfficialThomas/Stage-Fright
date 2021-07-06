@@ -11,7 +11,7 @@ class Menu extends Phaser.Scene {
 
     create(){
         //text format
-        let gameConfig = {
+        let gameText = {
             fontFamily: 'Impact',
             fontSize: '28px',
             color: '#000000',
@@ -31,8 +31,8 @@ class Menu extends Phaser.Scene {
         this.background.setScale(0.235);
 
         //menu text
-        this.add.text(game.config.width/2, game.config.height/2 - borderUISize*1, 'Stage Fright', gameConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2 + borderUISize*4, 'Punch (F) or Kick (J) to start', gameConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 - borderUISize*1, 'Stage Fright', gameText).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + borderUISize*4, 'Punch (F) or Kick (J) to start', gameText).setOrigin(0.5);
 
         //define keys
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);

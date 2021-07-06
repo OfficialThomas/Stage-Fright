@@ -26,7 +26,7 @@ class Play extends Phaser.Scene {
 
     create(){
         //text format
-        let gameConfig = {
+        let gameText = {
             fontFamily: 'Impact',
             fontSize: '28px',
             color: '#FFFFFF',
@@ -75,17 +75,17 @@ class Play extends Phaser.Scene {
         this.gameOver = false;
         
         //animation values
-        this.timeLimit = 300;
+        this.timeLimit = 250;
         this.fTimer = 0;
         this.jTimer = 0;
 
         //play text
         //score
-        this.saysScore = this.add.text(borderUISize + borderPadding*4, game.config.height - borderUISize*3, "Score", gameConfig);
-        this.scorePlayer = this.add.text(borderUISize + borderPadding*4, game.config.height - borderUISize*2, this.pScore, gameConfig);
+        this.saysScore = this.add.text(borderUISize + borderPadding*4, game.config.height - borderUISize*3, "Score", gameText);
+        this.scorePlayer = this.add.text(borderUISize + borderPadding*4, game.config.height - borderUISize*2, this.pScore, gameText);
         
         //lives
-        this.livestext = this.add.text(game.config.width - borderUISize*8, game.config.height - borderUISize*3, "Lives", gameConfig);
+        this.livestext = this.add.text(game.config.width - borderUISize*8, game.config.height - borderUISize*3, "Lives", gameText);
         this.heart1 = this.add.image(game.config.width - borderUISize*5, game.config.height - borderUISize*2.3, 'heart');
         this.heart2 = this.add.image(game.config.width - borderUISize*4, game.config.height - borderUISize*2.3, 'heart');
         this.heart3 = this.add.image(game.config.width - borderUISize*3, game.config.height - borderUISize*2.3, 'heart');

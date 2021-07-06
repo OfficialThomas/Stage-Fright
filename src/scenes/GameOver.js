@@ -10,7 +10,7 @@ class GameOver extends Phaser.Scene {
 
     create(){
         //text format
-        let gameConfig = {
+        let gameText = {
             fontFamily: 'Impact',
             fontSize: '28px',
             color: '#000000',
@@ -30,9 +30,9 @@ class GameOver extends Phaser.Scene {
         this.background.setScale(0.235);
 
         //game over text
-        this.add.text(game.config.width/2, game.config.height/2 - borderUISize*4, 'Game Over', gameConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2 + borderUISize*4, 'Punch (F) to return to the main menu', gameConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2 + borderUISize*5, 'Kick (J) to play again', gameConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 - borderUISize*4, 'Game Over', gameText).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + borderUISize*4, 'Punch (F) to return to the main menu', gameText).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + borderUISize*5, 'Kick (J) to play again', gameText).setOrigin(0.5);
         
         //define keys
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
