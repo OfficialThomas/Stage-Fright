@@ -39,7 +39,6 @@ class Play extends Phaser.Scene {
         }
         
         //play art:
-        
         //tile sprite
         this.stage = this.add.tileSprite(0, 0, 640, 480, 'stage').setOrigin(0, 0);
 
