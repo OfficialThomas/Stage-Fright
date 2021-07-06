@@ -109,13 +109,13 @@ class Play extends Phaser.Scene {
         }
 
         //collision check for player, blocks, and enemies
-        if(this.checkCollision(this.p1,this.e1)){
-            this.e1.reset();
+        console.log(this.checkCollision(this.p1,this.e1));
+        if(!this.checkCollision(this.p1,this.e1)){
+            this.e1.update();
         }
         this.checkCollision(this.p1,this.e2);
         
         //enemies move
-        this.e1.update();
         this.e2.update();
 
         //attack timers
@@ -164,6 +164,7 @@ class Play extends Phaser.Scene {
     checkCollision(rocket, ship){
         //simple AABB checking
         if (rocket.x < ship.x + ship.width && rocket.x + rocket.width > ship.x && rocket.y < ship.y + ship.height && rocket.height + rocket.y > ship.y){
+            console.log("pass");
             return true;
         } else {
             return false;
@@ -171,8 +172,6 @@ class Play extends Phaser.Scene {
     }
 
     //place new methods here
-
-
 }
 
 //f and j blocks pressed
