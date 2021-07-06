@@ -52,12 +52,17 @@ class Play extends Phaser.Scene {
         });
         this.p1 = this.add.sprite(game.config.width/2 - borderPadding*20, game.config.height/2, 'idle');
         this.p1.play({ key: 'running', repeat: -1 });
+        this.playerPunch = new Player(this, game.config.width/2 - borderPadding*20, game.config.height/2, 'punch', 0);
+        this.playerKick = new Player(this, game.config.width/2 - borderPadding*20, game.config.height/2, 'kick', 0);
+        this.playerPunch.alpha = 0;
+        this.playerKick.alpha = 0;
+
 
         // add punch and kick blocks
         this.top = this.add.image(game.config.width/2 - borderPadding*14, game.config.height/2 - borderPadding*4, 'punchF').setOrigin(0.5);
         this.bot = this.add.image(game.config.width/2 - borderPadding*14, game.config.height/2 + borderPadding*4, 'kickJ').setOrigin(0.5);
-        this.top.alpha = 0;
-        this.bot.alpha = 0;
+        this.top.alpha = 0.5;
+        this.bot.alpha = 0.5;
 
         //enemy
         this.e1 = new Enemy(this, game.config.width, game.config.height/2 - borderPadding*4, 'green', 0).setOrigin(0.5);
@@ -70,11 +75,9 @@ class Play extends Phaser.Scene {
         this.gameOver = false;
         
         //animation values
-        this.timeLimit = 500;
+        this.timeLimit = 300;
         this.fTimer = 0;
         this.jTimer = 0;
-        this.canPunch = true;
-        this.canKick = true;
 
         //play text
         //score
@@ -90,53 +93,48 @@ class Play extends Phaser.Scene {
         //define keys
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         keyJ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
+        
     }
 
     update(time, delta){
         //scrolling
         this.stage.tilePositionX += 1.5;
         
-        //new code needs to be here
         this.e1.update();
         this.e2.update();
 
-        //f and j blocks pressed
-        if (Phaser.Input.Keyboard.JustDown(keyF)) {
+        //attack timers
+        if(this.fTimer > 0){
+            this.fTimer -= delta;
+        } else {
+            this.top.alpha = 0.5;
+            this.playerPunch.alpha = 0;
+        }
+        if(this.jTimer > 0){
+            this.jTimer -= delta;
+        } else {
+            this.bot.alpha = 0.5;
+            this.playerKick.alpha = 0;
+        }
+        if(this.fTimer <= 0 && this.jTimer <= 0){
+            this.p1.alpha = 1;
+        }
+
+        //punch attack
+        if(Phaser.Input.Keyboard.JustDown(keyF) && this.fTimer <= 0){
             this.top.alpha = 1;
             this.p1.alpha = 0;
-            this.playerPunch = new Player(this, game.config.width/2 - borderPadding*20, game.config.height/2, 'punch', 0).setOrigin(0.5); // Player punch image/anim shows
-            keyJ.enabled = false
-            function onEvent() {                //used this for the time delay: https://phaser.io/examples/v3/view/time/timer-event
-                this.top.alpha = 0;
-                this.playerPunch.destroy();
-                this.p1.alpha = 1;
-                keyJ.enabled = true             //how to disable keys: https://phaser.discourse.group/t/temporarry-disable-key-captures-in-game/4524/3
-                keyF.enabled = true
-
-                /* Hey Thomas or Edward if you play the game there are some glitches with the f/j block going at the same 
-                time sometimes and also sometimes the punch and kick animations continue to stay on the screen*/
-
-            } 
-            this.timedEvent = this.time.delayedCall(500, onEvent, [], this);
+            this.playerKick.alpha = 0;
+            this.playerPunch.alpha = 1;
+            this.fTimer = this.timeLimit;
         }
-        if (Phaser.Input.Keyboard.JustDown(keyJ)) {
+        if(Phaser.Input.Keyboard.JustDown(keyJ) && this.jTimer <= 0){
             this.bot.alpha = 1;
             this.p1.alpha = 0;
-            this.playerKick = new Player(this, game.config.width/2 - borderPadding*20, game.config.height/2, 'kick', 0).setOrigin(0.5); //Player kick image/anim shows
-            keyF.enabled = false
-            function onEvent() {
-                this.bot.alpha = 0;
-                this.playerKick.destroy();
-                this.p1.alpha = 1; 
-                keyF.enabled = true
-                keyJ.enabled = true
-            } 
-            this.timedEvent = this.time.delayedCall(500, onEvent, [], this);
+            this.playerKick.alpha = 1;
+            this.playerPunch.alpha = 0;
+            this.jTimer = this.timeLimit;
         }
-
-
-
-        //stop new code here unless you are making a new method
 
         //end game condition
         if(this.lives <= 0){
@@ -158,5 +156,42 @@ class Play extends Phaser.Scene {
     }
 
     //place new methods here
-    
+
+
 }
+
+//f and j blocks pressed
+        /*if (Phaser.Input.Keyboard.JustDown(keyF)) {
+            this.top.alpha = 1;
+            this.p1.alpha = 0;
+            this.playerPunch = new Player(this, game.config.width/2 - borderPadding*20, game.config.height/2, 'punch', 0).setOrigin(0.5); // Player punch image/anim shows
+            keyJ.enabled = false;
+            function onEvent() {                //used this for the time delay: https://phaser.io/examples/v3/view/time/timer-event
+                this.top.alpha = 0.5;
+                this.playerPunch.destroy();
+                this.p1.alpha = 1;
+                keyJ.enabled = true;             //how to disable keys: https://phaser.discourse.group/t/temporarry-disable-key-captures-in-game/4524/3
+                keyF.enabled = true;
+
+                /* Hey Thomas or Edward if you play the game there are some glitches with the f/j block going at the same 
+                time sometimes and also sometimes the punch and kick animations continue to stay on the screen*/
+
+           /* } 
+            this.timedEvent = this.time.delayedCall(500, onEvent, [], this);
+        }
+
+        //ignore
+        if (Phaser.Input.Keyboard.JustDown(keyJ)) {
+            this.bot.alpha = 1;
+            this.p1.alpha = 0;
+            this.playerKick = new Player(this, game.config.width/2 - borderPadding*20, game.config.height/2, 'kick', 0).setOrigin(0.5); //Player kick image/anim shows
+            keyF.enabled = false;
+            function onEvent() {
+                this.bot.alpha = 0.5;
+                this.playerKick.destroy();
+                this.p1.alpha = 1; 
+                keyF.enabled = true;
+                keyJ.enabled = true;
+            } 
+            this.timedEvent = this.time.delayedCall(500, onEvent, [], this);
+        }*/
