@@ -38,11 +38,10 @@ class Play extends Phaser.Scene {
         this.stage = this.add.tileSprite(0, 0, 640, 480, 'stage').setOrigin(0, 0);
 
         // add player
-        //this.p1 = new Player(this, game.config.width/2 - borderPadding*20, game.config.height/2, 'idle', 0).setOrigin(0.5);
-        const playerAnimation = this.anims.create({
+        const playerAnimation = this.anims.create({ //reference https://labs.phaser.io/edit.html?src=src/animation/animation%20repeat%20event.js&v=3.55.2
             key: 'running',
             frames: this.anims.generateFrameNumbers('idle'),
-            frameRate: 16
+            frameRate: 12
         });
 
         this.p1 = this.add.sprite(game.config.width/2 - borderPadding*20, game.config.height/2, 'idle');
