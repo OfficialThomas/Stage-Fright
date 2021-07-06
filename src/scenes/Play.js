@@ -69,6 +69,7 @@ class Play extends Phaser.Scene {
 
         //values
         //ui values
+        this.scoreTime = 0;
         this.pScore = 0;
         this.lives = 3;
         this.gameOver = false;
@@ -98,7 +99,22 @@ class Play extends Phaser.Scene {
     update(time, delta){
         //scrolling
         this.stage.tilePositionX += 1.5;
+
+        //score based on time
+        this.scoreTime += delta;
+        if(this.scoreTime >= 1000){
+            this.scoreTime = 0;
+            this.pScore += 1;
+            this.scorePlayer.text = this.pScore;
+        }
+
+        //collision check for player, blocks, and enemies
+        if(this.checkCollision(this.p1,this.e1)){
+            this.e1.reset();
+        }
+        this.checkCollision(this.p1,this.e2);
         
+        //enemies move
         this.e1.update();
         this.e2.update();
 
@@ -145,9 +161,9 @@ class Play extends Phaser.Scene {
         }
     }
 
-    checkCollision(player, enemy){
+    checkCollision(rocket, ship){
         //simple AABB checking
-        if (player.x < enemy.x + enemy.width && player.x + player.width > enemy.x && player.y < enemy.y + enemy.height && player.height + player.y > enemy.y){
+        if (rocket.x < ship.x + ship.width && rocket.x + rocket.width > ship.x && rocket.y < ship.y + ship.height && rocket.height + rocket.y > ship.y){
             return true;
         } else {
             return false;
