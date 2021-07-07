@@ -31,9 +31,13 @@ class GameOver extends Phaser.Scene {
 
         //game over text
         this.add.text(game.config.width/2, game.config.height/2 - borderUISize*4, 'Game Over', gameText).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2 + borderUISize*4, 'Punch (F) to return to the main menu', gameText).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2 + borderUISize*5, 'Kick (J) to play again', gameText).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + borderUISize*4, 'Punch (F) twice to return to the main menu', gameText).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + borderUISize*5, 'Kick (J) twice to play again', gameText).setOrigin(0.5);
         
+        //variables
+        this.fCount = 0;
+        this.jCount = 0;
+
         //define keys
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         keyJ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
@@ -41,9 +45,17 @@ class GameOver extends Phaser.Scene {
 
     update(){
         if(Phaser.Input.Keyboard.JustDown(keyF)){
-            this.scene.start('menuScene');
+            this.fCount += 1;
+            this.jCount = 0;
+            if(this.fCount >= 2){
+                this.scene.start('menuScene');
+            }
         } else if(Phaser.Input.Keyboard.JustDown(keyJ)){
-            this.scene.start('playScene');
+            this.jCount += 1;
+            this.fCount = 0;
+            if(this.jCount >= 2){
+                this.scene.start('playScene');
+            }
         }
     }
 }
