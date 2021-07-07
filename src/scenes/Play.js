@@ -112,12 +112,24 @@ class Play extends Phaser.Scene {
         this.e1.update();
         this.e2.update();
 
-        //collision check for player, blocks, and enemies
-        if(this.checkCollision(this.p1,this.e1)){
+        //collision check between block vs enemy
+        if(this.checkCollision(this.top, this.e1)){
+            if(this.top.alpha > 0.5){
+                this.e1.reset();
+            }
+        }
+        if(this.checkCollision(this.bot, this.e2)){
+            if(this.bot.alpha > 0.5){
+                this.e2.reset();
+            }
+        }
+
+        //collision check between player vs enemy
+        if(this.checkCollision(this.p1, this.e1)){
             this.e1.reset();
             this.lives -= 1;
         }
-        if(this.checkCollision(this.p1,this.e2)){
+        if(this.checkCollision(this.p1, this.e2)){
             this.e2.reset();
             this.lives -= 1;
         }
