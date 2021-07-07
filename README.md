@@ -1,8 +1,12 @@
 # Stage-Fright
-An Infinite Runner Game For UCSC's Summer CMPM 120 Class. Developers include Thomas Noell, Juan Gaito, Jackie Nguyen, and Edward Gopez
+An Infinite Runner Game For UCSC's Summer CMPM 120 Class. 
+
+Developers include Thomas Noell, Juan Gaito, Jackie Nguyen, and Edward Gopez
 
 Thomas Noell, Juan Gaito, Jackie Nguyen, and Edward Gopez
+
 Endless Runner
+
 7/7/2021
 
 Our creative tilt:
