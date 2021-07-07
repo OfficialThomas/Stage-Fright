@@ -65,7 +65,7 @@ class Play extends Phaser.Scene {
 
         //enemy
         this.e1 = new Enemy(this, game.config.width, game.config.height/2 - borderPadding*4, 'green', 0).setOrigin(0.5);
-        this.e2 = new Enemy(this, game.config.width, game.config.height/2 + borderPadding*4, 'red', 0).setOrigin(0.5);
+        this.e2 = new Enemy(this, game.config.width + borderPadding*10, game.config.height/2 + borderPadding*4, 'red', 0).setOrigin(0.5);
 
         //values
         //ui values

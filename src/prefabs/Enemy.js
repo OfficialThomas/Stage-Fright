@@ -4,7 +4,8 @@ class Enemy extends Phaser.GameObjects.Sprite {
         super(scene, x, y, texture, frame);
         scene.add.existing(this);
         this.points = pointValue;
-        this.moveSpeed = 1.75;
+        this.moveSpeed = 1.25;
+        this.maxSpeed = 1.25;
     }
 
     update() {
@@ -13,7 +14,8 @@ class Enemy extends Phaser.GameObjects.Sprite {
     }
 
     reset() {
-        console.log("reset");
-        this.x = 640; //game.config.width;
+        this.maxSpeed += 0.05;
+        this.moveSpeed = Phaser.Math.Between(this.maxSpeed - 0.5, this.maxSpeed);
+        this.x = game.config.width;
     }
 }
