@@ -37,6 +37,13 @@ class Play extends Phaser.Scene {
             },
             fixedWidth: 0
         }
+
+        //music
+        //reference for looping music
+        //https://rexrainbow.github.io/phaser3-rex-notes/docs/site/audio/
+        this.music = this.sound.add('music');
+        this.music.setLoop(true);
+        this.music.play();
         
         //play art:
         //tile sprite
@@ -190,6 +197,7 @@ class Play extends Phaser.Scene {
         }
         //end game
         if(this.gameOver){
+            this.music.stop();
             this.scene.start('overScene');
         }
     }
