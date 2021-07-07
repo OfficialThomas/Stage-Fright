@@ -15,7 +15,7 @@ class Enemy extends Phaser.GameObjects.Sprite {
 
     reset() {
         this.maxSpeed += 0.05;
-        this.moveSpeed = Phaser.Math.Between(this.maxSpeed - 0.5, this.maxSpeed);
+        this.moveSpeed = Phaser.Math.Between(this.maxSpeed - 0.1, this.maxSpeed);
         this.x = game.config.width;
     }
 }

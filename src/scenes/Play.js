@@ -56,7 +56,6 @@ class Play extends Phaser.Scene {
         this.playerPunch.alpha = 0;
         this.playerKick.alpha = 0;
 
-
         // add punch and kick blocks
         this.top = this.add.image(game.config.width/2 - borderPadding*14, game.config.height/2 - borderPadding*4, 'punchF').setOrigin(0.5);
         this.bot = this.add.image(game.config.width/2 - borderPadding*14, game.config.height/2 + borderPadding*4, 'kickJ').setOrigin(0.5);
@@ -64,8 +63,8 @@ class Play extends Phaser.Scene {
         this.bot.alpha = 0.5;
 
         //enemy
-        this.e1 = new Enemy(this, game.config.width, game.config.height/2 - borderPadding*4, 'green', 0).setOrigin(0.5);
-        this.e2 = new Enemy(this, game.config.width + borderPadding*10, game.config.height/2 + borderPadding*4, 'red', 0).setOrigin(0.5);
+        this.e1 = new Enemy(this, game.config.width, game.config.height/2 - borderPadding*4, 'green', 0, 10).setOrigin(0.5);
+        this.e2 = new Enemy(this, game.config.width + borderPadding*20, game.config.height/2 + borderPadding*4, 'red', 0, 10).setOrigin(0.5);
 
         //values
         //ui values
@@ -116,11 +115,15 @@ class Play extends Phaser.Scene {
         if(this.checkCollision(this.top, this.e1)){
             if(this.top.alpha > 0.5){
                 this.e1.reset();
+                this.pScore += this.e1.points;
+                this.scorePlayer.text = this.pScore;
             }
         }
         if(this.checkCollision(this.bot, this.e2)){
             if(this.bot.alpha > 0.5){
                 this.e2.reset();
+                this.pScore += this.e2.points;
+                this.scorePlayer.text = this.pScore;
             }
         }
 
@@ -167,6 +170,18 @@ class Play extends Phaser.Scene {
             this.jTimer = this.timeLimit;
         }
 
+        //heart ui
+        if(this.lives == 2){
+            this.heart1.destroy();
+            this.heart1 = this.add.image(game.config.width - borderUISize*5, game.config.height - borderUISize*2.3, 'hearthalf');
+        } else if(this.lives == 1){
+            this.heart2.destroy();
+            this.heart2 = this.add.image(game.config.width - borderUISize*4, game.config.height - borderUISize*2.3, 'hearthalf');
+        } else if(this.lives == 0){
+            this.heart3.destroy();
+            this.heart3 = this.add.image(game.config.width - borderUISize*3, game.config.height - borderUISize*2.3, 'hearthalf');
+        }    
+
         //end game condition
         if(this.lives <= 0){
             this.gameOver = true;
@@ -185,42 +200,4 @@ class Play extends Phaser.Scene {
             return false;
         }
     }
-
-    //place new methods here
 }
-
-//f and j blocks pressed
-        /*if (Phaser.Input.Keyboard.JustDown(keyF)) {
-            this.top.alpha = 1;
-            this.p1.alpha = 0;
-            this.playerPunch = new Player(this, game.config.width/2 - borderPadding*20, game.config.height/2, 'punch', 0).setOrigin(0.5); // Player punch image/anim shows
-            keyJ.enabled = false;
-            function onEvent() {                //used this for the time delay: https://phaser.io/examples/v3/view/time/timer-event
-                this.top.alpha = 0.5;
-                this.playerPunch.destroy();
-                this.p1.alpha = 1;
-                keyJ.enabled = true;             //how to disable keys: https://phaser.discourse.group/t/temporarry-disable-key-captures-in-game/4524/3
-                keyF.enabled = true;
-
-                /* Hey Thomas or Edward if you play the game there are some glitches with the f/j block going at the same 
-                time sometimes and also sometimes the punch and kick animations continue to stay on the screen*/
-
-           /* } 
-            this.timedEvent = this.time.delayedCall(500, onEvent, [], this);
-        }
-
-        //ignore
-        if (Phaser.Input.Keyboard.JustDown(keyJ)) {
-            this.bot.alpha = 1;
-            this.p1.alpha = 0;
-            this.playerKick = new Player(this, game.config.width/2 - borderPadding*20, game.config.height/2, 'kick', 0).setOrigin(0.5); //Player kick image/anim shows
-            keyF.enabled = false;
-            function onEvent() {
-                this.bot.alpha = 0.5;
-                this.playerKick.destroy();
-                this.p1.alpha = 1; 
-                keyF.enabled = true;
-                keyJ.enabled = true;
-            } 
-            this.timedEvent = this.time.delayedCall(500, onEvent, [], this);
-        }*/
