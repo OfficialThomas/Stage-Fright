@@ -1,4 +1,5 @@
-/*Thomas Noell, Juan Gaito, Jackie Nguyen, and Edward Gopez
+/*Stage Fright
+Thomas Noell, Juan Gaito, Jackie Nguyen, and Edward Gopez
 Endless Runner
 7/7/2021
 
