@@ -161,6 +161,7 @@ class Play extends Phaser.Scene {
             this.playerKick.alpha = 0;
             this.playerPunch.alpha = 1;
             this.fTimer = this.timeLimit;
+            this.playHit();
         }
         if(Phaser.Input.Keyboard.JustDown(keyJ) && this.jTimer <= 0){
             this.bot.alpha = 1;
@@ -168,6 +169,7 @@ class Play extends Phaser.Scene {
             this.playerKick.alpha = 1;
             this.playerPunch.alpha = 0;
             this.jTimer = this.timeLimit;
+            this.playHit();
         }
 
         //heart ui
@@ -198,6 +200,20 @@ class Play extends Phaser.Scene {
             return true;
         } else {
             return false;
+        }
+    }
+
+    playHit(){
+        switch(Math.floor(Phaser.Math.Between(0,3))){
+            case 1:
+                this.sound.play('drum_sfx');
+                break;
+            case 2:
+                this.sound.play('symbol_sfx');
+                break;
+            default:
+                this.sound.play('drum_sfx');
+                break;
         }
     }
 }

@@ -5,6 +5,9 @@ class Menu extends Phaser.Scene {
 
     preload(){
         //load any audio for the game here
+        this.load.audio('drum_sfx', './assets/drumt.wav');
+        this.load.audio('symbol_sfx', './assets/symbol.wav');
+        this.load.audio('music', './assets/music.wav');
         //load any art for the scene here
         this.load.image('menu', './assets/endless_runner_menu_final.png');
     }
