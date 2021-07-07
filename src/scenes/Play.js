@@ -113,7 +113,7 @@ class Play extends Phaser.Scene {
         if(!this.checkCollision(this.p1,this.e1)){
             this.e1.update();
         }
-        this.checkCollision(this.p1,this.e2);
+        //this.checkCollision(this.p1,this.e2);
         
         //enemies move
         this.e2.update();
@@ -163,7 +163,7 @@ class Play extends Phaser.Scene {
 
     checkCollision(rocket, ship){
         //simple AABB checking
-        if (rocket.x < ship.x + ship.width && rocket.x + rocket.width > ship.x && rocket.y < ship.y + ship.height && rocket.height + rocket.y > ship.y){
+        if (ship.x < rocket.x && ship.x > rocket.x - rocket.width){
             return true;
         } else {
             return false;
