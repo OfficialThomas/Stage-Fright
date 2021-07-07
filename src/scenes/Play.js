@@ -202,6 +202,7 @@ class Play extends Phaser.Scene {
         }
     }
 
+    //referencing rocket patrol's collision checking
     checkCollision(rocket, ship){
         //simple AABB checking
         if (ship.x < rocket.x - rocket.width*0.1 && ship.x > rocket.x - rocket.width){
